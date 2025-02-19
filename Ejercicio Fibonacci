@@ -1,0 +1,23 @@
+
+#include <iostream>
+
+using namespace std ;
+
+int Fibo(int n);
+
+int main()
+
+{
+	int n;
+	cout << "Ingrese el valor de n: ";
+	cin >> n;
+	cout << "El Valor de Fibo es: " << Fibo(n) << endl;
+}
+
+int Fibo(int n)
+{
+	if (n <= 1)
+		return n;
+	else
+		return Fibo(n - 1) + Fibo(n - 2);
+}
