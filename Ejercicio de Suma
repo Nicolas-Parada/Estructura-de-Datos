@@ -1,0 +1,23 @@
+
+#include <iostream>
+
+using namespace std ;
+
+int sumarecursiva(int n);
+int numero;
+
+int main()
+{
+	cout << "Ingrese el valor de n: ";
+	cin >> numero;
+	cout << "La suma es: " << sumarecursiva(numero);
+}
+
+int sumarecursiva(int n)
+
+{
+	if (n == 1)
+		return 1;
+	else
+		return sumarecursiva(n - 1) + n;
+}
