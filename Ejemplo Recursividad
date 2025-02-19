@@ -1,0 +1,23 @@
+// EJEMPLO RECURSIVIDAD.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+
+#include <iostream>
+
+using namespace std;
+
+int factorial(int n);
+
+int main()
+{
+    int fact, n;
+    cout << "Ingrese el valor de n: ";
+    cin >> n;
+    fact = factorial(n);
+    cout << "El factorial de un numero es: " << fact;
+}
+int factorial(int n) {
+    if (n == 0)
+        return 1;
+    else
+        return factorial(n - 1) * n;
+}
