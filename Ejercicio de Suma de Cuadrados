@@ -1,0 +1,39 @@
+/*
+Autores: 
+Nicolas Parada
+Cristian Ortega
+
+Ejemplo 3. Sumas de Cuadrados
+*/
+
+#include <iostream>
+
+using namespace std;
+
+int sumaCuadrados(int n);
+
+int main() {
+    int N;
+
+    do {
+        cout << "Ingrese un número entero positivo: ";
+        cin >> N;
+
+        if (N < 1) {
+            cout << "Por favor, ingrese un número mayor o igual a 1." << endl;
+        }
+
+    } while (N < 1); 
+
+    int resultado = sumaCuadrados(N);
+    cout << "La suma de los cuadrados de los primeros " << N << " números es: " << resultado << endl;
+
+    return 0;
+}
+
+int sumaCuadrados(int n) {
+    if (n == 1) {
+        return 1; 
+    }
+    return (n * n) + sumaCuadrados(n - 1); // Caso recursivo
+}
