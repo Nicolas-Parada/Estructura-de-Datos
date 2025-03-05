@@ -1,0 +1,86 @@
+// cola.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include "Colae.h"
+
+#define MAX 100
+
+using namespace std;
+
+void main()
+{
+	Colae cola;
+	int Valor,op;
+	do {
+		cout << "=== Menu ===" << endl;
+		cout << "1. La Cola esta Vacia?" << endl;
+		cout << "2. Encolar" << endl;
+		cout << "3. Desencolar" << endl;
+		cout << "4. Mostrar" << endl;
+		cout << "5. Primero en Cola" << endl;
+		cout << "0. Finalizar" << endl;
+		cout << "Ingrese una Opcion: ";
+		cin >> op;
+		switch (op) {
+			case 1:
+				if (cola.ColaVacia())
+					cout << "La Cola esta Vacia" << endl;
+				else
+					cout << "Tiene valores en la Cola" << endl;
+				break;
+			case 2:
+				cout << "Ingrese el dato: ";
+				cin >> Valor;
+				if (cola.Encolar(Valor))
+					cout << "Error no se encolo" << endl;
+				else
+					cout << "Ingresado con exito" << endl;
+				break;
+
+			case 3:
+				if (cola.Desencolar())
+					cout << "Error no se desencolo" << endl;
+				else
+					cout << "Desencolado con exito" << endl;
+				break;
+
+			case 4:
+				cola.mostrar();
+				break;
+
+			case 5:
+				if (cola.PrimeroCola(Valor))
+					cout << "Cola Vacia" << endl;
+				else
+					cout << "El primero en la cola es: " << Valor << endl;
+				break;
+
+			case 0:
+				cout << "Salir";
+				break;
+
+			default:
+				cout << "Error";
+
+	}
+} while (op != 0);
+}
+
+/*
+	for (int j = 1; j < 10; j++)
+		if (!cola.Encolar(j))
+			cola.mostrar();
+		else
+			cout << "Error";
+	cout << endl << "Desencolar" << endl;
+	if (!cola.Desencolar())
+		cola.mostrar();
+	else
+		cout << "Error";
+	if (!cola.PrimeroCola(Valor))
+		cout << "Valor: " << Valor;
+	getch();
+} */
