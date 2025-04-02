@@ -1,0 +1,110 @@
+/*
+Autor: Nicolas Parada
+Fecha: 02/04/2025
+Ejemplo de cola simple 
+*/
+// COLA SIMPLE
+// 1. Librerías y using
+#include <iostream>
+using namespace std;
+
+// 2. Prototipos de clases
+class Nodo {
+public:
+    int dato;
+    Nodo* siguiente;
+
+    Nodo(int valor);  // Constructor
+};
+
+class Cola {
+private:
+    Nodo* frente;
+    Nodo* fin;
+
+public:
+    Cola();               // Constructor
+    ~Cola();              // Destructor
+
+    void encolar(int valor);
+    void desencolar();
+    void mostrar();
+    bool estaVacia();
+};
+
+// 3. Función main
+int main() {
+    Cola Colita;
+
+    Colita.encolar(10);
+    Colita.encolar(20);
+    Colita.encolar(30);
+
+    cout << "Cola actual: ";
+    Colita.mostrar();
+
+    Colita.desencolar();
+
+    cout << "Cola después de desencolar: ";
+    Colita.mostrar();
+
+    return 0;
+}
+
+// 4. Desarrollo de la clase Nodo
+Nodo::Nodo(int valor) {
+    dato = valor;
+    siguiente = nullptr;
+}
+
+// 5. Desarrollo de los métodos de la clase Cola
+Cola::Cola() {
+    frente = nullptr;
+    fin = nullptr;
+}
+
+Cola::~Cola() {
+    while (!estaVacia()) {
+        desencolar();
+    }
+}
+
+void Cola::encolar(int valor) {
+    Nodo* nuevo = new Nodo(valor);
+
+    if (fin == nullptr) {
+        frente = fin = nuevo;
+    } else {
+        fin->siguiente = nuevo;
+        fin = nuevo;
+    }
+}
+
+void Cola::desencolar() {
+    if (estaVacia()) {
+        cout << "Cola vacía, no se puede desencolar." << endl;
+        return;
+    }
+
+    Nodo* temp = frente;
+    frente = frente->siguiente;
+
+    if (frente == nullptr) {
+        fin = nullptr;
+    }
+
+    delete temp;
+}
+
+void Cola::mostrar() {
+    Nodo* actual = frente;
+    while (actual != nullptr) {
+        cout << actual->dato << " -> ";
+        actual = actual->siguiente;
+    }
+    cout << "NULL" << endl;
+}
+
+bool Cola::estaVacia() {
+    return frente == nullptr;
+}
