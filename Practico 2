@@ -1,0 +1,289 @@
+// ==== LIBRERÍAS ====
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+// ==== PROTOTIPOS ====
+void ejercicio1();
+void ejercicio2();
+void ejercicio3();
+void ejercicio4();
+void ejercicio5();
+void ejercicio6();
+void ejercicio7();
+void ejercicio8();
+void ejercicio9();
+void ejercicio10();
+void ejercicio11();
+void ejercicio12();
+void ejercicio13();
+void ejercicio14();
+void ejercicio15();
+void ejercicio16();
+void ejercicio17();
+
+// ==== MAIN ====
+int main() {
+    int opcion;
+    do {
+        cout << "\n==== MENÚ DE EJERCICIOS ====\n";
+        cout << "1. Máximo valor del vector\n";
+        cout << "2. Mínimo valor del vector\n";
+        cout << "3. Promedio del vector\n";
+        cout << "4. Revertir vector en otro\n";
+        cout << "5. Verificar si vector es capicúa\n";
+        cout << "6. Promedio de cada tres valores\n";
+        cout << "7. Número a texto (0-20)\n";
+        cout << "8. Mayor diferencia consecutiva\n";
+        cout << "9. Concatenar dos vectores\n";
+        cout << "10. Intercalar vectores ordenados\n";
+        cout << "11. Contar positivos, negativos y ceros\n";
+        cout << "12. Eliminar duplicados\n";
+        cout << "13. Revertir vector en sí mismo\n";
+        cout << "14. Ordenar vector ascendente\n";
+        cout << "15. Tres mejores notas con alumnos\n";
+        cout << "16. Menú de alumnos y notas\n";
+        cout << "17. Serie de Fibonacci\n";
+        cout << "0. Salir\n";
+        cout << "Seleccione una opción: ";
+        cin >> opcion;
+
+        switch(opcion) {
+            case 1: ejercicio1(); break;
+            case 2: ejercicio2(); break;
+            case 3: ejercicio3(); break;
+            case 4: ejercicio4(); break;
+            case 5: ejercicio5(); break;
+            case 6: ejercicio6(); break;
+            case 7: ejercicio7(); break;
+            case 8: ejercicio8(); break;
+            case 9: ejercicio9(); break;
+            case 10: ejercicio10(); break;
+            case 11: ejercicio11(); break;
+            case 12: ejercicio12(); break;
+            case 13: ejercicio13(); break;
+            case 14: ejercicio14(); break;
+            case 15: ejercicio15(); break;
+            case 16: ejercicio16(); break;
+            case 17: ejercicio17(); break;
+            case 0: cout << "Saliendo del programa.\n"; break;
+            default: cout << "Opción inválida\n";
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
+
+// ==== FUNCIONES ====
+void ejercicio1() {
+    vector<float> v = {2.5, 7.1, 4.9, 8.3, 5.6};
+    float max = v[0];
+    for (float val : v) if (val > max) max = val;
+    cout << "Máximo valor: " << max << endl;
+}
+
+void ejercicio2() {
+    vector<float> v = {2.5, 7.1, 4.9, 8.3, 5.6};
+    float min = v[0];
+    for (float val : v) if (val < min) min = val;
+    cout << "Mínimo valor: " << min << endl;
+}
+
+void ejercicio3() {
+    vector<float> v = {2.5, 7.1, 4.9, 8.3, 5.6};
+    float suma = 0;
+    for (float val : v) suma += val;
+    cout << "Promedio: " << (suma / v.size()) << endl;
+}
+
+void ejercicio4() {
+    vector<float> original = {1.2, 3.4, 5.6, 7.8};
+    vector<float> invertido(original.rbegin(), original.rend());
+    cout << "Vector invertido: ";
+    for (float val : invertido) cout << val << " ";
+    cout << endl;
+}
+
+void ejercicio5() {
+    vector<int> v = {1, 2, 3, 2, 1};
+    bool capicua = true;
+    for (size_t i = 0; i < v.size() / 2; ++i) {
+        if (v[i] != v[v.size() - 1 - i]) {
+            capicua = false;
+            break;
+        }
+    }
+    cout << (capicua ? "Es capicúa.\n" : "No es capicúa.\n");
+}
+
+void ejercicio6() {
+    vector<float> v = {1, 2, 3, 4, 5, 6};
+    cout << "Promedios de cada tres valores:\n";
+    for (size_t i = 0; i + 2 < v.size(); ++i) {
+        float promedio = (v[i] + v[i+1] + v[i+2]) / 3.0;
+        cout << "P" << i+1 << " = " << promedio << endl;
+    }
+}
+
+void ejercicio7() {
+    string texto[] = {"CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS",
+                      "SIETE", "OCHO", "NUEVE", "DIEZ", "ONCE", "DOCE", "TRECE",
+                      "CATORCE", "QUINCE", "DIECISÉIS", "DIECISIETE", "DIECIOCHO",
+                      "DIECINUEVE", "VEINTE"};
+    int n;
+    cout << "Ingrese un número (0 a 20): ";
+    cin >> n;
+    if (n >= 0 && n <= 20)
+        cout << "Número en texto: " << texto[n] << endl;
+    else
+        cout << "Fuera de rango.\n";
+}
+
+void ejercicio8() {
+    vector<float> v = {1.1, 5.5, 2.0, 8.4, 3.0};
+    float maxDif = 0;
+    for (size_t i = 0; i < v.size() - 1; ++i) {
+        float dif = fabs(v[i+1] - v[i]);
+        if (dif > maxDif) maxDif = dif;
+    }
+    cout << "Mayor diferencia consecutiva: " << maxDif << endl;
+}
+
+void ejercicio9() {
+    vector<float> A = {1.1, 2.2, 3.3};
+    vector<float> B = {4.4, 5.5, 6.6};
+    vector<float> C = A;
+    C.insert(C.end(), B.begin(), B.end());
+    cout << "Vector concatenado: ";
+    for (float val : C) cout << val << " ";
+    cout << endl;
+}
+
+void ejercicio10() {
+    vector<int> A = {1, 3, 5};
+    vector<int> B = {2, 4, 6, 7};
+    vector<int> C;
+    size_t i = 0, j = 0;
+    while (i < A.size() && j < B.size()) {
+        if (A[i] < B[j]) C.push_back(A[i++]);
+        else C.push_back(B[j++]);
+    }
+    while (i < A.size()) C.push_back(A[i++]);
+    while (j < B.size()) C.push_back(B[j++]);
+    cout << "Vector intercalado: ";
+    for (int val : C) cout << val << " ";
+    cout << endl;
+}
+
+void ejercicio11() {
+    vector<int> v = {-2, 0, 3, -1, 5, 0};
+    int pos = 0, neg = 0, cero = 0;
+    for (int val : v) {
+        if (val > 0) pos++;
+        else if (val < 0) neg++;
+        else cero++;
+    }
+    cout << "Positivos: " << pos << ", Negativos: " << neg << ", Ceros: " << cero << endl;
+}
+
+void ejercicio12() {
+    vector<int> v = {1, 2, 2, 3, 4, 4, 5};
+    sort(v.begin(), v.end());
+    v.erase(unique(v.begin(), v.end()), v.end());
+    cout << "Sin duplicados: ";
+    for (int val : v) cout << val << " ";
+    cout << endl;
+}
+
+void ejercicio13() {
+    vector<int> v = {1, 2, 3, 4, 5};
+    reverse(v.begin(), v.end());
+    cout << "Vector invertido: ";
+    for (int val : v) cout << val << " ";
+    cout << endl;
+}
+
+void ejercicio14() {
+    vector<float> v = {5.6, 2.1, 9.0, 3.3};
+    sort(v.begin(), v.end());
+    cout << "Vector ordenado: ";
+    for (float val : v) cout << val << " ";
+    cout << endl;
+}
+
+void ejercicio15() {
+    vector<string> alumnos = {"Ana", "Luis", "Carlos", "Sofia"};
+    vector<float> notas = {80, 95, 78, 90};
+    for (size_t i = 0; i < notas.size() - 1; ++i) {
+        for (size_t j = i + 1; j < notas.size(); ++j) {
+            if (notas[j] > notas[i]) {
+                swap(notas[i], notas[j]);
+                swap(alumnos[i], alumnos[j]);
+            }
+        }
+    }
+    cout << "Tres mejores notas:\n";
+    for (int i = 0; i < 3 && i < notas.size(); ++i)
+        cout << alumnos[i] << ": " << notas[i] << endl;
+}
+
+void ejercicio16() {
+    vector<string> alumnos;
+    vector<float> notas;
+    int op;
+    do {
+        cout << "\n-- MENÚ ALUMNOS --\n";
+        cout << "1. Ingresar alumno y nota\n";
+        cout << "2. Listar alumnos\n";
+        cout << "3. Ordenar alfabéticamente\n";
+        cout << "4. Mejor nota\n";
+        cout << "5. Promedio de notas\n";
+        cout << "0. Volver al menú principal\n";
+        cin >> op;
+        if (op == 1) {
+            string nombre; float nota;
+            cout << "Nombre: "; cin >> nombre;
+            cout << "Nota: "; cin >> nota;
+            alumnos.push_back(nombre); notas.push_back(nota);
+        } else if (op == 2) {
+            for (size_t i = 0; i < alumnos.size(); ++i)
+                cout << alumnos[i] << ": " << notas[i] << endl;
+        } else if (op == 3) {
+            for (size_t i = 0; i < alumnos.size() - 1; ++i) {
+                for (size_t j = i + 1; j < alumnos.size(); ++j) {
+                    if (alumnos[j] < alumnos[i]) {
+                        swap(alumnos[i], alumnos[j]);
+                        swap(notas[i], notas[j]);
+                    }
+                }
+            }
+        } else if (op == 4) {
+            float max = -1; int idx = -1;
+            for (size_t i = 0; i < notas.size(); ++i) {
+                if (notas[i] > max) { max = notas[i]; idx = i; }
+            }
+            if (idx != -1)
+                cout << "Mejor alumno: " << alumnos[idx] << " (" << notas[idx] << ")\n";
+        } else if (op == 5) {
+            float suma = 0;
+            for (float n : notas) suma += n;
+            cout << "Promedio: " << (notas.empty() ? 0 : suma / notas.size()) << endl;
+        }
+    } while (op != 0);
+}
+
+void ejercicio17() {
+    int n;
+    cout << "Cantidad de términos: ";
+    cin >> n;
+    vector<int> fib;
+    if (n >= 1) fib.push_back(0);
+    if (n >= 2) fib.push_back(1);
+    for (int i = 2; i < n; ++i)
+        fib.push_back(fib[i-1] + fib[i-2]);
+    for (int val : fib) cout << val << " ";
+    cout << endl;
+}
