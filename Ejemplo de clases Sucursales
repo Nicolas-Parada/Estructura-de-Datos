@@ -1,0 +1,84 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int MAX_EMPLEADOS = 100;
+
+class Empleado {
+private:
+    string nombre;
+    int edad;
+    float salario;
+
+public:
+    void ingresarDatos() {
+        cout << "Ingrese nombre: ";
+        cin.ignore();
+        getline(cin, nombre);
+        cout << "Ingrese edad: ";
+        cin >> edad;
+        cout << "Ingrese salario: ";
+        cin >> salario;
+    }
+
+    void mostrarDatos() const {
+        cout << "Nombre: " << nombre << endl;
+        cout << "Edad: " << edad << " años" << endl;
+        cout << "Salario: $" << salario << endl;
+        cout << "------------------------" << endl;
+    }
+};
+
+class Planilla {
+private:
+    Empleado empleados[MAX_EMPLEADOS];
+    int cantidad;
+    string Sucursal;
+
+public:
+    Planilla(string nombre) {
+        cantidad = 0;
+        Sucursal = nombre;
+    }
+
+    void ingresarEmpleados() {
+        cout << "\nSucursal: " << Sucursal << endl;
+        cout << "¿Cuántos empleados desea ingresar? ";
+        cin >> cantidad;
+
+        if (cantidad > MAX_EMPLEADOS || cantidad <= 0) {
+            cout << "Número no válido. El máximo permitido es " << MAX_EMPLEADOS << "." << endl;
+            cantidad = 0;
+            return;
+        }
+
+        for (int i = 0; i < cantidad; ++i) {
+            cout << "\nEmpleado #" << (i + 1) << " - Sucursal " << Sucursal << endl;
+            empleados[i].ingresarDatos();
+        }
+    }
+
+    void mostrarPlanilla() const {
+        cout << "\n=== PLANILLA DE LA SUCURSAL " << Sucursal << " ===" << endl;
+        for (int i = 0; i < cantidad; ++i) {
+            empleados[i].mostrarDatos();
+        }
+    }
+};
+
+int main() {
+    Planilla Brisas("Brisas");
+    Planilla Mall("Mall");
+    Planilla Cinecenter("CineCenter");
+
+    Brisas.ingresarEmpleados();
+    Mall.ingresarEmpleados();
+    Cinecenter.ingresarEmpleados();
+
+    Brisas.mostrarPlanilla();
+    Mall.mostrarPlanilla();
+    Cinecenter.mostrarPlanilla();
+
+    return 0;
+}
