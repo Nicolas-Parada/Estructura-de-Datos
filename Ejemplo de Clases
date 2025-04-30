@@ -1,0 +1,60 @@
+#include "Numeros.h"
+#include "Math.h"
+#include <iostream>
+#define MAX 100
+using namespace std;
+
+class Numeros
+{
+private:
+	int primos[MAX];
+	int cantidad;
+	bool esPrimo(int x);
+public:
+	Numeros();
+	void cargarPrimo(int n);
+	void mostrarPrimos();
+
+};
+
+int main() {
+	Numeros numeritos;
+	int n;
+	do {
+		cout << "Ingrese el numero de primos a generar";
+		cin >> n;
+	} while ((n < 0) || (n > MAX));
+	numeritos.cargarPrimo(n);
+	numeritos.mostrarPrimos();
+}
+
+
+Numeros::Numeros() {
+	cantidad = 0;
+}
+bool Numeros::esPrimo(int x) {
+	for (int i = 2; i <= sqrt(x); i++) {
+		if (x % i == 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+}
+void Numeros::cargarPrimo(int n) {
+	int j = 0;
+	for (int i = 2; i < MAX; i++) {
+		if (esPrimo(i)&&(j<=n)) {
+			primos[j] = i;
+			j++;
+		}
+	}
+	cantidad = n;
+}
+void Numeros::mostrarPrimos() {
+	for (int i = 0; i < cantidad; i++) {
+		cout << primos[i] << "\t cuadrado: " << primos[i] * primos[i] << "\t Cubo: " << primos[i] * primos[i] * primos[i];
+	}
+
+}
